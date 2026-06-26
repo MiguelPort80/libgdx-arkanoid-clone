@@ -51,7 +51,7 @@ public class Paddle {
 	public void update() {
 		this.x = Gdx.input.getX();
 		//O opengl renderiza o paddle num lugar e o mouse no outro, se vc não inverter eles vão para direções opostas
-		this.y = ( Gdx.graphics.getHeight() - Gdx.input.getY() );
+		//this.y = ( Gdx.graphics.getHeight() - Gdx.input.getY() );
 		
 		if (x > Gdx.graphics.getWidth() - width){
 			x = (Gdx.graphics.getWidth() - width) - 4;

@@ -71,7 +71,7 @@ public class Ball {
 		if (x < 0 || x > Gdx.graphics.getWidth() - size) {
 			xSpeed = -xSpeed;
 		}
-		if (x < 0 || x == size) {
+		if (x <= 0 && x == size) {
 			xSpeed = -xSpeed;
 		}
 
@@ -91,42 +91,87 @@ public class Ball {
 
 	public void checkCollision(Paddle paddle) {
 		if (collidesWith(paddle)) {
-			color = Color.GREEN;
+			ySpeed = -ySpeed;
 		} else {
-			color = Color.WHITE;
+			
 		}
 	}
 
 	private boolean collidesWith(Paddle paddle) {
 		// Raio = 20 colide se for menor que o X + raio
-		
-		
+
 		Integer trueHeight = paddle.getY() + paddle.getHeight();
 		Integer trueWidth = paddle.getX() + paddle.getWidth();
 		// vefica a clisão do bottom-left
-		if (trueHeight >= this.y - size
-				&& trueHeight <= this.y + size) {
+		if (trueHeight >= this.y - size && trueHeight <= this.y + size) {
 			if (paddle.getX() >= this.x - size && paddle.getX() <= this.x + size) {
 
 				return true;
 			}
 			// verifica a colisão do bottom-right
-			if (trueWidth >= this.x - size
-					&& trueWidth <= this.x + size) {
+			if (trueWidth >= this.x - size && trueWidth <= this.x + size) {
 
 				return true;
 			}
 
 		}
-		
-		//if (trueWidth >= this.x - size || trueWidth <= this.x + size) {
-			// verifica a colisão do top
-			if (trueHeight == (this.y - size)){
-				if(paddle.getX() <= this.x || paddle.getX() >= this.x) {
+
+		// if (trueWidth >= this.x - size || trueWidth <= this.x + size) {
+		// verifica a colisão do top
+		// esquerda é menos, e direita é mais
+		if (!(trueWidth > this.x - size) || !(trueWidth < this.x + size + paddle.getWidth())) {
+			System.out.println("Eu odeio minha vida");
+		} else {
+			if (trueHeight == (this.y - size)) {
 				return true;
-				}
+
 			}
-		//}
+		}
+
+		// }
+		return false;
+	}
+	public void checkCollision(Block block) {
+		if (collidesWith(block)) {
+			ySpeed = -ySpeed;
+			block.setDestroyed(true);
+		} else {
+			
+		}
+	}
+
+	private boolean collidesWith(Block block) {
+		// Raio = 20 colide se for menor que o X + raio
+
+		Integer trueHeight = block.getY() + block.getHeight();
+		Integer trueWidth = block.getX() + block.getWidth();
+		// vefica a clisão do bottom-left
+		if (trueHeight >= this.y - size && trueHeight <= this.y + size) {
+			if (block.getX() >= this.x - size && block.getX() <= this.x + size) {
+
+				return true;
+			}
+			// verifica a colisão do bottom-right
+			if (trueWidth >= this.x - size && trueWidth <= this.x + size) {
+
+				return true;
+			}
+
+		}
+
+		// if (trueWidth >= this.x - size || trueWidth <= this.x + size) {
+		// verifica a colisão do top
+		// esquerda é menos, e direita é mais
+		if (!(trueWidth > this.x - size) || !(trueWidth < this.x + size + block.getWidth())) {
+			System.out.println("Eu odeio minha vida");
+		} else {
+			if (trueHeight == (this.y - size)) {
+				return true;
+
+			}
+		}
+
+		// }
 		return false;
 	}
 }
