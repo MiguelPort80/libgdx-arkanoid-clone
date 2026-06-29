@@ -120,7 +120,6 @@ public class Ball {
 		// verifica a colisão do top
 		// esquerda é menos, e direita é mais
 		if (!(trueWidth > this.x - size) || !(trueWidth < this.x + size + paddle.getWidth())) {
-			System.out.println("Eu odeio minha vida");
 		} else {
 			if (trueHeight == (this.y - size)) {
 				return true;

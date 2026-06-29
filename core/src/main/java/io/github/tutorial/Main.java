@@ -34,7 +34,7 @@ public class Main extends ApplicationAdapter {
 		}
 
 		shape = new ShapeRenderer();
-		ball = new Ball(300, 300, 15, 8, 4);
+		ball = new Ball(100, 100, 15, 7, 3);
 		// ball = new Ball(windowWidth/2, windowHeight/2, 20,0,0);
 		paddle = new Paddle(30, 30, 70, 10);
 	}
@@ -51,6 +51,16 @@ public class Main extends ApplicationAdapter {
 		ball.checkCollision(paddle);
 		for (Block block : blocks) {
 			block.draw(shape);
+	        ball.checkCollision(block);
+		}
+		
+		for(int i = 0; i < blocks.size(); i++) {
+			Block b = blocks.get(i);
+			if(b.isDestroyed()) {
+				blocks.remove(i);
+				
+				i--;
+			}
 		}
 		
 		ball.draw(shape);
